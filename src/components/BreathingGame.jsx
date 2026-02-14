@@ -55,7 +55,7 @@ const BreathingGame = ({ onComplete, disabled, canStart }) => {
   }
 
   return (
-    <div className="breathing-container">
+    <div className="breathing-container phase-1">
       <div className="breathing-circle-wrapper">
         <div className={`breathing-circle ${isRunning ? 'active' : ''}`}>
           <div className="breathing-text">{breathText}</div>

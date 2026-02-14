@@ -78,12 +78,12 @@ const VideoSession = ({ session, phase, title, duration, videoUrl, description =
     ? 'Gentle guided meditation and mindful movement for emotional balance'
     : 'Soft stretching exercises to support physical recovery'
 
-  const defaultImage = phase === 'Phase 2'
-    ? 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80'
-    : 'https://images.unsplash.com/photo-1516627145497-ae6968af70e9?w=400&h=400&fit=crop&q=80'
+  const defaultImage = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQm7LzuGoTOH25Rw6W8GJnNsXWnqGyq_Bzbqw&s'
+
+  const phaseClass = phase === 'Phase 2' ? 'phase-2' : 'phase-3'
 
   return (
-    <div className="video-card">
+    <div className={`video-card ${phaseClass}`}>
       <div className="video-player-wrapper">
         <div>
           <h3>{title}</h3>
@@ -100,7 +100,7 @@ const VideoSession = ({ session, phase, title, duration, videoUrl, description =
         {error && <p className="error-banner">{error}</p>}
         <div className="video-actions">
           {completedToday ? (
-            <p style={{ color: '#2E7D32', fontWeight: '700', margin: 0 }}>✓ Session completed today!</p>
+            <p className="session-complete">✓ Session completed today!</p>
           ) : (
             <>
               <CalmButton 

@@ -7,26 +7,10 @@ const PhaseCard = ({
   actionLabel = 'Start Session',
   onAction = null
 }) => {
-  const borderColor = {
-    1: '#DCEEFF',
-    2: '#E8F5E9',
-    3: '#FFF8E1'
-  }[phaseNumber] || '#DCEEFF'
-
-  const bgColor = {
-    1: '#F0F7FF',
-    2: '#F1F8F4',
-    3: '#FFFBF0'
-  }[phaseNumber] || '#F0F7FF'
+  const phaseClass = `phase-card-premium phase-${phaseNumber}`
 
   return (
-    <div 
-      className="phase-card-premium" 
-      style={{ 
-        borderLeftColor: borderColor,
-        backgroundColor: bgColor
-      }}
-    >
+    <div className={phaseClass}>
       <div className="phase-card-header">
         <div className="phase-badge">
           Phase {phaseNumber}

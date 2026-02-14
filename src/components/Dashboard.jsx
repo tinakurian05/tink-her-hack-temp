@@ -5,6 +5,7 @@ import HealthForm from './HealthForm'
 import PhaseSession from './PhaseSession'
 import HeroSection from './HeroSection'
 import SectionContainer from './SectionContainer'
+import GraphSection from './GraphSection'
 
 const calculateRecoveryScore = ({
   moodScore,
@@ -145,7 +146,7 @@ const Dashboard = ({ session }) => {
 
         <SectionContainer title="Recovery Status" subtitle="Your latest wellness snapshot">
           <div className="dashboard-grid">
-            <div className="card" style={{ background: 'linear-gradient(135deg, #E3F2FD 0%, #F3E5F5 100%)' }}>
+            <div className="card card--blue">
               <div className="summary-label" style={{ marginBottom: '12px' }}>Latest Recovery Score</div>
               <div className="summary-score" style={{ marginBottom: '12px' }}>
                 {latestScore !== null ? latestScore : '--'}
@@ -155,7 +156,7 @@ const Dashboard = ({ session }) => {
               )}
             </div>
 
-            <div className="card" style={{ background: 'linear-gradient(135deg, #E8F5E9 0%, #F1F8F4 100%)' }}>
+            <div className="card card--green">
               <div className="summary-label" style={{ marginBottom: '16px' }}>Delivery Details</div>
               <div className="details-grid" style={{ gap: '12px' }}>
                 <div className="detail-item">
@@ -177,7 +178,7 @@ const Dashboard = ({ session }) => {
               </div>
             </div>
 
-            <div className="card" style={{ background: 'linear-gradient(135deg, #FFF8E1 0%, #FFFBF0 100%)' }}>
+            <div className="card card--peach">
               <div className="summary-label" style={{ marginBottom: '12px' }}>💭 Postpartum Journal</div>
               <p style={{ color: '#6B7280', marginBottom: '16px', fontSize: '0.95rem' }}>
                 Share thoughts, photos, or notes from your recovery journey.
@@ -227,6 +228,10 @@ const Dashboard = ({ session }) => {
           <div style={{ marginBottom: '40px' }}>
             <PhaseSession session={session} />
           </div>
+        </SectionContainer>
+
+        <SectionContainer title="Recovery Trends" subtitle="Track your progress over the last 5 days">
+          <GraphSection records={records} loading={loading} error={error} />
         </SectionContainer>
 
         <SectionContainer title="Daily Health Tracking" subtitle="Log your wellness signals to track your recovery">

@@ -4,7 +4,7 @@ const HeroSection = () => {
       <div className="hero-container">
         <div className="hero-content">
           <h1 className="hero-title">
-            Your Postpartum Recovery Journey
+            Mother Heaven
             <span className="hero-emoji">🌿</span>
           </h1>
           <p className="hero-subtitle">
@@ -17,8 +17,8 @@ const HeroSection = () => {
         </div>
         <div className="hero-image">
           <img 
-            src="https://images.unsplash.com/photo-1493252645019-e70e8267df61?w=500&h=500&fit=crop&q=80" 
-            alt="Mother holding baby peacefully"
+            src="https://img.freepik.com/free-photo/mother-with-her-baby-girl-home_1303-29021.jpg?w=360" 
+            alt="Mother holding baby"
             className="hero-img"
           />
         </div>

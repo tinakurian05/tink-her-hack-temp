@@ -90,12 +90,10 @@ const PhaseOneSession = ({ session }) => {
   return (
     <div className="phase-content">
       {completedToday ? (
-        <div style={{ textAlign: 'center', padding: '40px 20px' }}>
-          <p style={{ fontSize: '3rem', marginBottom: '16px' }}>🌸</p>
-          <p style={{ fontSize: '1.1rem', color: '#4F46E5', fontWeight: '700', marginBottom: '8px' }}>
-            Session Completed
-          </p>
-          <p style={{ color: '#6B7280', marginBottom: '0' }}>
+        <div className="phase-complete">
+          <p className="phase-complete-icon">🌸</p>
+          <p className="phase-complete-title">Session Completed</p>
+          <p className="phase-complete-text">
             Great job! Consistency builds recovery. Your garden is growing.
           </p>
         </div>
@@ -118,7 +116,7 @@ const PhaseOneSession = ({ session }) => {
             />
             <div className="mood-values">
               <span>Overwhelmed</span>
-              <span style={{ fontWeight: '700', color: '#4F46E5' }}>{getMoodLabel(moodBefore)}</span>
+              <span className="mood-highlight">{getMoodLabel(moodBefore)}</span>
               <span>Calm</span>
             </div>
           </div>
@@ -146,7 +144,7 @@ const PhaseOneSession = ({ session }) => {
             />
             <div className="mood-values">
               <span>Overwhelmed</span>
-              <span style={{ fontWeight: '700', color: '#4F46E5' }}>{getMoodLabel(moodAfter)}</span>
+              <span className="mood-highlight">{getMoodLabel(moodAfter)}</span>
               <span>Calm</span>
             </div>
           </div>
