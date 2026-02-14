@@ -1,350 +1,333 @@
-# Postpartum Recovery Risk Analyzer 🎯
+# MOTHER HEAVEN🎯
 
 ## Basic Details
-Team Name: [Name]
 
-Team Members
-Member 1: [Name] - [College]
-Member 2: [Name] - [College]
+**Team Name:** GIRLY POP
 
-Hosted Project Link
-[mention your project hosted link here]
+**Team Members**
+- Member 1: TEENA SAJI - CHRIST COLLEGE OF ENGINEERING
+- Member 2: TINA KURIAN V - CHRIST COLLEGE OF ENGINEERING
+
+**Hosted Project Link**
+motherheaven.netlify.app
+
+---
 
 ## Project Description
-Postpartum Recovery Risk Analyzer is a React-based healthcare web app that helps new mothers track daily recovery signals like mood, sleep, bleeding, pain, iron intake, and support. It calculates a 0–100 recovery score, classifies risk levels, and provides guidance based on risk. Trend charts visualize recovery over the last 5 days.
 
-## The Problem statement
-Postpartum recovery issues often go unnoticed due to a lack of daily monitoring and guidance. Mothers may not know when to seek help, and clinicians lack timely recovery data for interventions.
+MOTHER HEAVEN is a React-based healthcare web application that helps new mothers track their recovery journey after childbirth. The app monitors daily wellness signals (mood, sleep, bleeding, pain, iron intake, support levels) and automatically calculates a recovery score (0-100) with risk classification. It provides context-aware guidance by connecting high-risk users with specialists, moderate-risk users with nutritionists, and stable users with recovery tips. The system includes trend visualization to help users and healthcare providers spot patterns over time.
 
-## The Solution
-Provide a structured daily tracking system that quantifies recovery, classifies risk levels, visualizes short-term trends, and routes users to appropriate care resources or tips.
+---
+
+## Problem Statement
+
+Postpartum recovery is a critical period where complications can arise silently. Many mothers don't have easy access to continuous monitoring or guidance, leading to delayed intervention in high-risk situations. Healthcare providers lack real-time data on patient recovery patterns, and mothers struggle to interpret their symptoms and know when to seek help.
+
+---
+
+## Solution
+
+Our app creates a structured daily tracking system that:
+- **Quantifies recovery** through a scientific scoring algorithm
+- **Classifies risk levels** to guide users to appropriate resources (specialists, nutritionists, or tips)
+- **Visualizes trends** over 5 days to identify improvement or deterioration
+- **Connects users** with verified specialists in their area
+- **Provides evidence-based guidance** tailored to recovery phase
+
+---
 
 ## Technical Details
 
 ### Technologies/Components Used
 
-For Software:
+**For Software:**
 
-Languages used: JavaScript, HTML, CSS
-Frameworks used: React 19.2, Vite 8, React Router 7
-Libraries used: Recharts, Supabase JS
-Tools used: VS Code, Git, Netlify
+- **Languages used:** JavaScript (ES6+), HTML5, CSS3
+- **Frameworks used:** React 19.2, Vite 8, React Router 7
+- **Libraries used:** Recharts (data visualization), Axios (HTTP), React Hook Form
+- **Backend/Database:** Supabase (PostgreSQL + Auth)
+- **Tools used:** VS Code, Git, npm, Netlify (deployment)
 
-For Hardware:
-
-Main components: N/A
-Specifications: N/A
-Tools required: N/A
+---
 
 ## Features
-List the key features of your project:
 
-Feature 1: Daily health check‑in for mood, sleep, bleeding, pain, iron intake, support.
-Feature 2: Automatic recovery score (0–100) with risk classification.
-Feature 3: Trend visualization for last 5 days.
-Feature 4: Context-aware navigation to specialists or tips.
+- **Daily Health Tracking:** Log mood (1-5), sleep hours, bleeding level, pain score, iron intake, and support level
+- **Automatic Recovery Score Calculation:** Algorithm-based scoring (0-100 scale) with instant feedback
+- **Risk Classification:** High Risk (0-40), Moderate Risk (41-70), Stable (71-100)
+- **Recovery Trends:** Line charts showing recovery score and mood trends over the last 5 days
+- **Specialist Directory:** Access to doctors, nutritionists, and mental health professionals
+- **Recovery Tips:** Evidence-based guidance tailored to recovery phase
+- **Delivery Details Storage:** Track delivery date, type, and location for medical context
+- **Postpartum Journal:** Personal journaling space for recovery reflections
+- **Secure Authentication:** Email-based auth with Supabase
+- **Responsive Design:** Works on mobile and desktop devices
+
+---
 
 ## Implementation
-For Software:
 
-Installation
+### Installation
+
 ```bash
+# Clone the repository
+git clone https://github.com/tinakurian05/tink-her-hack-temp.git
+cd tinkher
+
+# Install dependencies
 npm install
+
+# Create .env.local file and add:
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
-Run
+### Run
+
 ```bash
+# Development server (runs on http://localhost:5174)
 npm run dev
+
+# Production build
+npm run build
+
+# Preview production build
+npm run preview
 ```
 
-For Hardware:
-
-Components Required
-N/A
-
-Circuit Setup
-N/A
+---
 
 ## Project Documentation
 
-For Software:
+### Screenshots
 
-Screenshots (Add at least 3)
-![Screenshot1](Add screenshot 1 here with proper name) Add caption explaining what this shows
+https://drive.google.com/drive/folders/1xeYC5Fjy-IYdIMTfzBi2oceXlEMsTBLe?usp=sharing
 
-![Screenshot2](Add screenshot 2 here with proper name) Add caption explaining what this shows
 
-![Screenshot3](Add screenshot 3 here with proper name) Add caption explaining what this shows
+#### System Architecture
 
-Diagrams
-System Architecture:
+```
+┌─────────────────────────────────────────────────────────┐
+│                    React Frontend (Vite)                │
+│  ┌────────────────┬──────────────┬────────────────────┐ │
+│  │   Dashboard    │ HealthForm   │  Trends (Recharts) │ │
+│  │   Specialists  │   Journal    │      Tips          │ │
+│  └────────────────┴──────────────┴────────────────────┘ │
+└──────────────────────────┬────────────────────────────────┘
+                           │ (HTTP/REST)
+                           ▼
+┌─────────────────────────────────────────────────────────┐
+│              Supabase Backend (PostgreSQL)              │
+│  ┌────────────────────────────────────────────────────┐ │
+│  │  Auth Module  │  daily_records Table  │   RLS      │ │
+│  └────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────┘
+```
 
-Architecture Diagram Explain your system architecture - components, data flow, tech stack interaction
+**Data Flow:**
+1. User logs in via Supabase Auth
+2. Daily health data submitted via HealthForm
+3. Recovery score calculated on frontend
+4. Data persisted to PostgreSQL via Supabase
+5. Trends fetched and visualized with Recharts
+6. RLS policies ensure users see only their own data
 
-Application Workflow:
+#### Application Workflow
 
-Workflow Add caption explaining your workflow
+```
+┌──────────────┐
+│   Login      │
+└──────┬───────┘
+       │
+       ▼
+┌──────────────────────────┐
+│   Dashboard (Main Hub)   │
+│ - Recovery Score Display │
+│ - Delivery Details       │
+│ - Risk Alert System      │
+└──────┬──────────┬────────┘
+       │          │
+       ▼          ▼
+   ┌────────┐  ┌──────────────────┐
+   │ Trends │  │ Daily Check-in   │
+   │ Charts │  │ (Health Logging) │
+   └────────┘  └────────┬─────────┘
+                        │
+              ┌─────────┴─────────┐
+              │                   │
+              ▼                   ▼
+        ┌─────────────┐  ┌──────────────┐
+        │ Specialist  │  │ Tips/Journal │
+        │ Directory   │  │ (Stable Path)│
+        └─────────────┘  └──────────────┘
+```
 
-For Hardware:
+---
 
-Schematic & Circuit
-![Circuit](Add your circuit diagram here) Add caption explaining connections
+## API Documentation
 
-![Schematic](Add your schematic diagram here) Add caption explaining the schematic
+### Base URL
+```
+https://your-supabase-url/rest/v1
+```
 
-Build Photos
-![Team](Add photo of your team here)
+### Endpoints
 
-![Components](Add photo of your components here) List out all components shown
+#### POST `/daily_records`
+**Description:** Create a new daily health record
 
-![Build](Add photos of build process here) Explain the build steps
+**Request Body:**
+```json
+{
+  "user_id": "uuid",
+  "mood_score": 3,
+  "sleep_hours": 6,
+  "bleeding_level": 2,
+  "pain_score": 4,
+  "iron_intake": true,
+  "support_level": 2,
+  "recovery_score": 65,
+  "risk_level": "Moderate Risk"
+}
+```
 
-![Final](Add photo of final product here) Explain the final build
+**Response:**
+```json
+{
+  "id": "record-uuid",
+  "created_at": "2025-02-14T10:30:00Z",
+  "status": "success"
+}
+```
+
+#### GET `/daily_records`
+**Description:** Fetch user's daily records (last 5 days)
+
+**Parameters:**
+- `user_id` (uuid): Authenticated user's ID
+- `limit` (integer): Number of records to fetch (default: 5)
+
+**Response:**
+```json
+{
+  "data": [
+    {
+      "id": "record-uuid",
+      "created_at": "2025-02-14T10:30:00Z",
+      "recovery_score": 65,
+      "mood_score": 3,
+      "risk_level": "Moderate Risk"
+    }
+  ],
+  "count": 5
+}
+```
+
+---
+
+## Installation Guide
+
+### Web Application (Netlify)
+
+1. Visit the deployed link: [Your Netlify URL]
+2. Click "Sign Up" to create account
+3. Enter your name, email, delivery details
+4. Start logging your daily health metrics
+5. View trends and access resources based on your recovery level
+
+### Building from Source
+
+```bash
+# Install Node.js 18+
+
+# Clone and setup
+git clone https://github.com/tinakurian05/tink-her-hack-temp.git
+cd tinkher
+npm install
+
+# Configure environment
+# Create .env.local with Supabase credentials
+
+# Run locally
+npm run dev
+
+# Build for production
+npm run build
+```
+
+---
 
 ## Additional Documentation
 
-For Web Projects with Backend:
-
-API Documentation
-Base URL: https://api.yourproject.com
-
-Endpoints
-GET /api/endpoint
-
-Description: [What it does]
-Parameters:
-param1 (string): [Description]
-param2 (integer): [Description]
-Response:
-{
-  "status": "success",
-  "data": {}
-}
-
-POST /api/endpoint
-
-Description: [What it does]
-Request Body:
-{
-  "field1": "value1",
-  "field2": "value2"
-}
-Response:
-{
-  "status": "success",
-  "message": "Operation completed"
-}
-
-[Add more endpoints as needed...]
-
-For Mobile Apps:
-
-App Flow Diagram
-App Flow Explain the user flow through your application
-
-Installation Guide
-For Android (APK):
-
-Download the APK from [Release Link]
-Enable "Install from Unknown Sources" in your device settings:
-Go to Settings > Security
-Enable "Unknown Sources"
-Open the downloaded APK file
-Follow the installation prompts
-Open the app and enjoy!
-
-For iOS (IPA) - TestFlight:
-
-Download TestFlight from the App Store
-Open this TestFlight link: [Your TestFlight Link]
-Click "Install" or "Accept"
-Wait for the app to install
-Open the app from your home screen
-
-Building from Source:
-
-# For Android
-flutter build apk
-# or
-./gradlew assembleDebug
-
-# For iOS
-flutter build ios
-# or
-xcodebuild -workspace App.xcworkspace -scheme App -configuration Debug
-
-For Hardware Projects:
-
-Bill of Materials (BOM)
-Component	Quantity	Specifications	Price	Link/Source
-Arduino Uno	1	ATmega328P, 16MHz	₹450	[Link]
-LED	5	Red, 5mm, 20mA	₹5 each	[Link]
-Resistor	5	220Ω, 1/4W	₹1 each	[Link]
-Breadboard	1	830 points	₹100	[Link]
-Jumper Wires	20	Male-to-Male	₹50	[Link]
-[Add more...]
-
-Total Estimated Cost: ₹[Amount]
-
-Assembly Instructions
-Step 1: Prepare Components
-
-Gather all components listed in the BOM
-Check component specifications
-Prepare your workspace Step 1 Caption: All components laid out
-
-Step 2: Build the Power Supply
-
-Connect the power rails on the breadboard
-Connect Arduino 5V to breadboard positive rail
-Connect Arduino GND to breadboard negative rail Step 2 Caption: Power connections completed
-
-Step 3: Add Components
-
-Place LEDs on breadboard
-Connect resistors in series with LEDs
-Connect LED cathodes to GND
-Connect LED anodes to Arduino digital pins (2-6) Step 3 Caption: LED circuit assembled
-
-Step 4: [Continue for all steps...]
-
-Final Assembly: Final Build Caption: Completed project ready for testing
-
-For Scripts/CLI Tools:
-
-Command Reference
-Basic Usage:
-
-python script.py [options] [arguments]
-
-Available Commands:
-
-command1 [args] - Description of what command1 does
-command2 [args] - Description of what command2 does
-command3 [args] - Description of what command3 does
-
-Options:
-
--h, --help - Show help message and exit
--v, --verbose - Enable verbose output
--o, --output FILE - Specify output file path
--c, --config FILE - Specify configuration file
---version - Show version information
-
-Examples:
-
-# Example 1: Basic usage
-python script.py input.txt
-
-# Example 2: With verbose output
-python script.py -v input.txt
-
-# Example 3: Specify output file
-python script.py -o output.txt input.txt
-
-# Example 4: Using configuration
-python script.py -c config.json --verbose input.txt
-
-Demo Output
-Example 1: Basic Processing
-
-Input:
-
-This is a sample input file
-with multiple lines of text
-for demonstration purposes
-
-Command:
-
-python script.py sample.txt
-
-Output:
-
-Processing: sample.txt
-Lines processed: 3
-Characters counted: 86
-Status: Success
-Output saved to: output.txt
-
-Example 2: Advanced Usage
-
-Input:
-
-{
-  "name": "test",
-  "value": 123
-}
-
-Command:
-
-python script.py -v --format json data.json
-
-Output:
-
-[VERBOSE] Loading configuration...
-[VERBOSE] Parsing JSON input...
-[VERBOSE] Processing data...
-{
-  "status": "success",
-  "processed": true,
-  "result": {
-    "name": "test",
-    "value": 123,
-    "timestamp": "2024-02-07T10:30:00"
-  }
-}
-
-[VERBOSE] Operation completed in 0.23s
-
-## Project Demo
-Video
-[Add your demo video link here - YouTube, Google Drive, etc.]
-
-Explain what the video demonstrates - key features, user flow, technical highlights
-
-Additional Demos
-[Add any extra demo materials/links - Live site, APK download, online demo, etc.]
-
-## AI Tools Used (Optional - For Transparency Bonus)
-If you used AI tools during development, document them here for transparency:
-
-Tool Used: [e.g., GitHub Copilot, v0.dev, Cursor, ChatGPT, Claude]
-
-Purpose: [What you used it for]
-
-Example: "Generated boilerplate React components"
-Example: "Debugging assistance for async functions"
-Example: "Code review and optimization suggestions"
-
-Key Prompts Used:
-
-"Create a REST API endpoint for user authentication"
-"Debug this async function that's causing race conditions"
-"Optimize this database query for better performance"
-
-Percentage of AI-generated code: [Approximately X%]
-
-Human Contributions:
-
-Architecture design and planning
-Custom business logic implementation
-Integration and testing
-UI/UX design decisions
-
-Note: Proper documentation of AI usage demonstrates transparency and earns bonus points in evaluation!
+### Bill of Materials (For Reference)
+
+| Component | Purpose | Cost |
+|-----------|---------|------|
+| React 19.2 | Frontend Framework | Free (OSS) |
+| Vite 8 | Build Tool | Free (OSS) |
+| Supabase | Backend + Database | Free tier available |
+| Recharts | Data Visualization | Free (OSS) |
+| React Router | Client-side Routing | Free (OSS) |
+| Netlify | Hosting/Deployment | Free tier available |
+
+**Total Estimated Cost:** Free (all open-source/free tier)
+
+---
 
 ## Team Contributions
-[Name 1]: [Specific contributions - e.g., Frontend development, API integration, etc.]
-[Name 2]: [Specific contributions - e.g., Backend development, Database design, etc.]
-[Name 3]: [Specific contributions - e.g., UI/UX design, Testing, Documentation, etc.]
+
+- **[TEENA SAJI]:** Frontend development (React components, UI/UX, Recovery score calculation)
+- **[TINA KURAIN V]:** Backend integration (Supabase setup, API, Testing)
+
+
+---
+
+## Demo
+
+### Video
+https://drive.google.com/drive/folders/1hQtQDSndAuL0mt978QSqzsXj8BUFYU2d?usp=sharing
+
+**What the demo shows:**
+- Signing up and entering delivery details
+- Logging daily health metrics
+- Recovery score calculation and risk classification
+- Viewing trend charts
+- Specialist recommendations based on risk level
+- Journal functionality for reflection
+
+---
+
+## AI Tools Used
+
+**Tool Used:** GitHub Copilot
+
+**Purpose:**
+- Generated boilerplate React component structures
+- Debugging assistance for async Supabase queries
+- CSS styling optimization suggestions
+- Code review and documentation improvements
+
+**Key Prompts Used:**
+- "Create a React component for a daily health form with multiple input types"
+- "Debug this Supabase RLS policy for user data isolation"
+- "Design a recovery score calculation algorithm for postpartum health"
+
+**Percentage of AI-generated code:** ~20% (primarily boilerplate and structure)
+
+**Human Contributions:**
+- Complete algorithm design for recovery scoring
+- System architecture and database schema
+- Business logic and risk classification rules
+- UI/UX design decisions aligned with healthcare best practices
+- Integration testing and data validation
+- Project planning and feature prioritization
+
+---
 
 ## License
-This project is licensed under the [LICENSE_NAME] License - see the LICENSE file for details.
 
-Common License Options:
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-MIT License (Permissive, widely used)
-Apache 2.0 (Permissive with patent grant)
-GPL v3 (Copyleft, requires derivative works to be open source)
+---
 
 Made with ❤️ at TinkerHub
