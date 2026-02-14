@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { supabase } from '../supabaseClient'
 import HealthForm from './HealthForm'
 import PhaseSession from './PhaseSession'
+import HeroSection from './HeroSection'
+import SectionContainer from './SectionContainer'
 
 const calculateRecoveryScore = ({
   moodScore,
@@ -128,102 +130,114 @@ const Dashboard = ({ session }) => {
   }, [session])
 
   return (
-    <div className="app-shell">
-      <header className="header">
-        <div>
-          <h1>Postpartum Recovery Risk Analyzer</h1>
-          <p className="muted">Track daily signals and spot risk early.</p>
-        </div>
-        <button className="secondary-btn" onClick={handleSignOut}>
-          Sign out
-        </button>
-      </header>
-
-      <section className="summary">
-        <div className="summary-card">
-          <div className="summary-label">Latest Recovery Score</div>
-          <div className="summary-score">
-            {latestScore !== null ? latestScore : '--'}
+    <>
+      <HeroSection />
+      <div className="app-shell">
+        <header className="header">
+          <div>
+            <h2>Your Recovery Dashboard</h2>
+            <p className="muted">Daily tracking helps you spot patterns and celebrate progress.</p>
           </div>
-          {latestRisk && (
-            <span className={`risk-badge ${riskClass}`}>{latestRisk}</span>
-          )}
-        </div>
-        <div className="summary-card">
-          <div className="summary-label">Delivery Details</div>
-          <div className="details-grid">
-            <div className="detail-item">
-              <span className="detail-label">Name</span>
-              <span className="detail-value">{deliveryDetails.fullName}</span>
-            </div>
-            <div className="detail-item">
-              <span className="detail-label">Date</span>
-              <span className="detail-value">{deliveryDetails.deliveryDate}</span>
-            </div>
-            <div className="detail-item">
-              <span className="detail-label">Type</span>
-              <span className="detail-value">{deliveryDetails.deliveryType}</span>
-            </div>
-            <div className="detail-item">
-              <span className="detail-label">Hospital</span>
-              <span className="detail-value">{deliveryDetails.deliveryLocation}</span>
-            </div>
-            <div className="detail-item detail-notes">
-              <span className="detail-label">Notes</span>
-              <span className="detail-value">{deliveryDetails.deliveryNotes}</span>
-            </div>
-          </div>
-        </div>
-        <div className="summary-card">
-          <div className="summary-label">Postpartum Journal</div>
-          <p className="muted">Share thoughts, photos, or notes from your recovery journey.</p>
-          <button className="primary-btn" onClick={() => navigate('/journal')}>
-            Open Journal
+          <button className="secondary-btn" onClick={handleSignOut}>
+            Sign out
           </button>
-        </div>
-        {latestRisk === 'High Risk' && (
-          <div className="alert">
-            <strong>⚠️ High risk detected.</strong> Consider contacting your care team.
-            <button
-              className="alert-link"
-              onClick={() => navigate('/specialists')}
-            >
-              Consult Specialist →
-            </button>
-          </div>
-        )}
-        {latestRisk === 'Moderate Risk' && (
-          <div className="alert alert-moderate">
-            <strong>ℹ️ Moderate risk level.</strong> Talk to a nutritionist for guidance.
-            <button
-              className="alert-link"
-              onClick={() => navigate('/specialists')}
-            >
-              Find Nutritionist →
-            </button>
-          </div>
-        )}
-        {latestRisk === 'Stable' && (
-          <div className="alert alert-stable">
-            <strong>✅ Stable recovery!</strong> Keep following these tips for best results.
-            <button
-              className="alert-link"
-              onClick={() => navigate('/tips')}
-            >
-              View Tips →
-            </button>
-          </div>
-        )}
-      </section>
+        </header>
 
-      <div className="dashboard-grid">
-        <PhaseSession session={session} />
-        <HealthForm onSubmit={handleSubmit} loading={saving} />
+        <SectionContainer title="Recovery Status" subtitle="Your latest wellness snapshot">
+          <div className="dashboard-grid">
+            <div className="card" style={{ background: 'linear-gradient(135deg, #E3F2FD 0%, #F3E5F5 100%)' }}>
+              <div className="summary-label" style={{ marginBottom: '12px' }}>Latest Recovery Score</div>
+              <div className="summary-score" style={{ marginBottom: '12px' }}>
+                {latestScore !== null ? latestScore : '--'}
+              </div>
+              {latestRisk && (
+                <span className={`risk-badge ${riskClass}`}>{latestRisk}</span>
+              )}
+            </div>
+
+            <div className="card" style={{ background: 'linear-gradient(135deg, #E8F5E9 0%, #F1F8F4 100%)' }}>
+              <div className="summary-label" style={{ marginBottom: '16px' }}>Delivery Details</div>
+              <div className="details-grid" style={{ gap: '12px' }}>
+                <div className="detail-item">
+                  <span className="detail-label">Name</span>
+                  <span className="detail-value">{deliveryDetails.fullName}</span>
+                </div>
+                <div className="detail-item">
+                  <span className="detail-label">Date</span>
+                  <span className="detail-value">{deliveryDetails.deliveryDate}</span>
+                </div>
+                <div className="detail-item">
+                  <span className="detail-label">Type</span>
+                  <span className="detail-value">{deliveryDetails.deliveryType}</span>
+                </div>
+                <div className="detail-item">
+                  <span className="detail-label">Hospital</span>
+                  <span className="detail-value">{deliveryDetails.deliveryLocation}</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="card" style={{ background: 'linear-gradient(135deg, #FFF8E1 0%, #FFFBF0 100%)' }}>
+              <div className="summary-label" style={{ marginBottom: '12px' }}>💭 Postpartum Journal</div>
+              <p style={{ color: '#6B7280', marginBottom: '16px', fontSize: '0.95rem' }}>
+                Share thoughts, photos, or notes from your recovery journey.
+              </p>
+              <button className="calm-btn calm-btn--primary calm-btn--full" onClick={() => navigate('/journal')}>
+                Open Journal
+              </button>
+            </div>
+          </div>
+
+          {latestRisk === 'High Risk' && (
+            <div className="alert">
+              <strong>⚠️ High risk detected.</strong> Consider contacting your care team.
+              <button
+                className="alert-link"
+                onClick={() => navigate('/specialists')}
+              >
+                Consult Specialist →
+              </button>
+            </div>
+          )}
+          {latestRisk === 'Moderate Risk' && (
+            <div className="alert alert-moderate">
+              <strong>ℹ️ Moderate risk level.</strong> Talk to a nutritionist for guidance.
+              <button
+                className="alert-link"
+                onClick={() => navigate('/specialists')}
+              >
+                Find Nutritionist →
+              </button>
+            </div>
+          )}
+          {latestRisk === 'Stable' && (
+            <div className="alert alert-stable">
+              <strong>✅ Stable recovery!</strong> Keep following these tips for best results.
+              <button
+                className="alert-link"
+                onClick={() => navigate('/tips')}
+              >
+                View Tips →
+              </button>
+            </div>
+          )}
+        </SectionContainer>
+
+        <SectionContainer title="Today's Recovery Program" subtitle="Choose your session based on your recovery phase">
+          <div style={{ marginBottom: '40px' }}>
+            <PhaseSession session={session} />
+          </div>
+        </SectionContainer>
+
+        <SectionContainer title="Daily Health Tracking" subtitle="Log your wellness signals to track your recovery">
+          <HealthForm onSubmit={handleSubmit} loading={saving} />
+        </SectionContainer>
+
+        {error && <div className="error-banner">{error}</div>}
       </div>
-
-      {error && <div className="error-banner">{error}</div>}
-    </div>
+    </>
   )
 }
+
 
 export default Dashboard

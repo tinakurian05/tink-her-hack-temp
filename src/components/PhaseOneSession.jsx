@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { supabase } from '../supabaseClient'
 import BreathingGame from './BreathingGame'
 import GratitudeGarden from './GratitudeGarden'
+import CalmButton from './CalmButton'
 
 const PhaseOneSession = ({ session }) => {
   const [moodBefore, setMoodBefore] = useState(3)
@@ -81,71 +82,88 @@ const PhaseOneSession = ({ session }) => {
     setSaving(false)
   }
 
+  const getMoodLabel = (value) => {
+    const labels = { 1: 'Very Low', 2: 'Low', 3: 'Neutral', 4: 'Good', 5: 'Excellent' }
+    return labels[value] || 'Neutral'
+  }
+
   return (
     <div className="phase-content">
-      <div className="session-card">
-        <div className="session-header">
-          <h3>Breathing Pulse</h3>
-          <span className="session-duration">3–5 minutes</span>
+      {completedToday ? (
+        <div style={{ textAlign: 'center', padding: '40px 20px' }}>
+          <p style={{ fontSize: '3rem', marginBottom: '16px' }}>🌸</p>
+          <p style={{ fontSize: '1.1rem', color: '#4F46E5', fontWeight: '700', marginBottom: '8px' }}>
+            Session Completed
+          </p>
+          <p style={{ color: '#6B7280', marginBottom: '0' }}>
+            Great job! Consistency builds recovery. Your garden is growing.
+          </p>
         </div>
-
-        {completedToday ? (
-          <div className="alert alert-stable">
-            You’ve completed today’s session 🌿
-          </div>
-        ) : (
-          <>
-            <label className="field">
-              Mood before session (1–5)
-              <input
-                type="range"
-                min="1"
-                max="5"
-                value={moodBefore}
-                onChange={(event) => {
-                  setMoodBefore(Number(event.target.value))
-                  setMoodBeforeTouched(true)
-                }}
-              />
+      ) : (
+        <>
+          <div className="breathing-mood-section">
+            <label className="mood-label">
+              How are you feeling right now?
             </label>
-
-            <BreathingGame
-              disabled={completedToday}
-              canStart={moodBeforeTouched}
-              onComplete={() => setTimerDone(true)}
+            <input
+              type="range"
+              className="mood-slider"
+              min="1"
+              max="5"
+              value={moodBefore}
+              onChange={(event) => {
+                setMoodBefore(Number(event.target.value))
+                setMoodBeforeTouched(true)
+              }}
             />
+            <div className="mood-values">
+              <span>Overwhelmed</span>
+              <span style={{ fontWeight: '700', color: '#4F46E5' }}>{getMoodLabel(moodBefore)}</span>
+              <span>Calm</span>
+            </div>
+          </div>
 
-            <label className="field">
-              Mood after session (1–5)
-              <input
-                type="range"
-                min="1"
-                max="5"
-                value={moodAfter}
-                onChange={(event) => {
-                  setMoodAfter(Number(event.target.value))
-                  setMoodAfterTouched(true)
-                }}
-              />
+          <BreathingGame
+            disabled={completedToday}
+            canStart={moodBeforeTouched}
+            onComplete={() => setTimerDone(true)}
+          />
+
+          <div className="breathing-mood-section">
+            <label className="mood-label">
+              How do you feel after breathing?
             </label>
+            <input
+              type="range"
+              className="mood-slider"
+              min="1"
+              max="5"
+              value={moodAfter}
+              onChange={(event) => {
+                setMoodAfter(Number(event.target.value))
+                setMoodAfterTouched(true)
+              }}
+            />
+            <div className="mood-values">
+              <span>Overwhelmed</span>
+              <span style={{ fontWeight: '700', color: '#4F46E5' }}>{getMoodLabel(moodAfter)}</span>
+              <span>Calm</span>
+            </div>
+          </div>
 
-            {error && <div className="error-banner">{error}</div>}
+          {error && <div className="error-banner">{error}</div>}
 
-            <button
-              className="primary-btn"
-              type="button"
-              disabled={!timerDone || !moodAfterTouched || saving}
-              onClick={handleComplete}
-            >
-              {saving ? 'Saving…' : 'Mark Session Complete'}
-            </button>
-          </>
-        )}
-
-        {completedToday && (
-          <p className="consistency">Consistency builds recovery 🌿</p>
-        )}
-      </div>
+          <CalmButton
+            variant="primary"
+            size="lg"
+            fullWidth
+            disabled={!timerDone || !moodAfterTouched || saving}
+            onClick={handleComplete}
+          >
+            {saving ? 'Saving…' : 'Complete Session'}
+          </CalmButton>
+        </>
+      )}
 
       <GratitudeGarden sessions={sessions} />
     </div>

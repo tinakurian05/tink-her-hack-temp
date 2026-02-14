@@ -49,8 +49,17 @@ const Login = () => {
   return (
     <div className="auth-page">
       <div className="auth-card">
-        <h1>Postpartum Recovery Risk Analyzer</h1>
-        <p className="muted">Secure access to your recovery dashboard.</p>
+        <h2 style={{ 
+          background: 'linear-gradient(135deg, #c084fc 0%, #f97316 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+          fontSize: '2rem',
+          marginBottom: '8px'
+        }}>
+          Postpartum Recovery
+        </h2>
+        <p className="muted" style={{ marginBottom: '28px' }}>Secure access to your recovery dashboard.</p>
 
         <form className="form" onSubmit={handleSubmit}>
           {mode === 'signup' && (

@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { supabase } from '../supabaseClient'
+import CalmButton from './CalmButton'
 
-const VideoSession = ({ session, phase, title, duration, videoUrl }) => {
+const VideoSession = ({ session, phase, title, duration, videoUrl, description = '', benefits = [], sideImage = null }) => {
   const [started, setStarted] = useState(false)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
@@ -73,52 +74,82 @@ const VideoSession = ({ session, phase, title, duration, videoUrl }) => {
     setSaving(false)
   }
 
+  const defaultDescription = phase === 'Phase 2' 
+    ? 'Gentle guided meditation and mindful movement for emotional balance'
+    : 'Soft stretching exercises to support physical recovery'
+
+  const defaultImage = phase === 'Phase 2'
+    ? 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop&q=80'
+    : 'https://images.unsplash.com/photo-1516627145497-ae6968af70e9?w=400&h=400&fit=crop&q=80'
+
   return (
-    <div className="session-card">
-      <div className="session-header">
+    <div className="video-card">
+      <div className="video-player-wrapper">
         <div>
           <h3>{title}</h3>
-          <p className="muted">{duration}</p>
+          <p className="session-duration">⏱ {duration}</p>
+        </div>
+        <div className="video-frame">
+          <iframe
+            src={videoUrl}
+            title={title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+        {error && <p className="error-banner">{error}</p>}
+        <div className="video-actions">
+          {completedToday ? (
+            <p style={{ color: '#2E7D32', fontWeight: '700', margin: 0 }}>✓ Session completed today!</p>
+          ) : (
+            <>
+              <CalmButton 
+                variant={!started ? 'primary' : 'outline'}
+                onClick={() => setStarted(true)}
+                disabled={started}
+                fullWidth
+              >
+                {started ? 'Session Started' : 'Start Session'}
+              </CalmButton>
+              {started && (
+                <CalmButton 
+                  variant="secondary"
+                  onClick={handleComplete}
+                  disabled={saving}
+                  fullWidth
+                >
+                  {saving ? 'Saving...' : 'Mark as Completed'}
+                </CalmButton>
+              )}
+            </>
+          )}
         </div>
       </div>
 
-      {completedToday ? (
-        <div className="alert alert-stable">Today’s session completed 🌿</div>
-      ) : (
-        <>
-          <div className="video-wrapper">
-            <iframe
-              src={videoUrl}
-              title={title}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </div>
-
-          <div className="video-actions">
-            <button
-              className="secondary-btn"
-              type="button"
-              onClick={() => setStarted(true)}
-              disabled={started}
-            >
-              {started ? 'Session Started' : 'Start Session'}
-            </button>
-            <button
-              className="primary-btn"
-              type="button"
-              onClick={handleComplete}
-              disabled={!started || saving}
-            >
-              {saving ? 'Saving…' : 'Mark as Completed'}
-            </button>
-          </div>
-        </>
-      )}
-
-      {error && <div className="error-banner">{error}</div>}
-      {completedToday && <p className="consistency">Consistency builds recovery 🌿</p>}
+      <div className="video-side-content">
+        <div>
+          <img 
+            src={sideImage || defaultImage} 
+            alt={title} 
+            className="side-image" 
+          />
+        </div>
+        <div>
+          <p className="video-description">
+            {description || defaultDescription}
+          </p>
+          {benefits.length > 0 && (
+            <div className="video-benefits">
+              {benefits.map((benefit, index) => (
+                <div key={index} className="benefit-item">
+                  <span className="benefit-icon">✨</span>
+                  <span>{benefit}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   )
 }

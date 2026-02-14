@@ -48,21 +48,36 @@ const BreathingGame = ({ onComplete, disabled, canStart }) => {
     setIsRunning(true)
   }
 
+  const handleStop = () => {
+    setIsRunning(false)
+    setRemaining(TOTAL_SECONDS)
+    setBreathText('Inhale')
+  }
+
   return (
-    <div className="breathing-game">
-      <div className={`breathing-circle ${isRunning ? 'breathing-active' : ''}`}>
-        <span className="breathing-text">{breathText}</span>
-      </div>
-      <div className="breathing-meta">
-        <div className="timer">{formattedTime}</div>
-        <button
-          className="primary-btn"
-          type="button"
-          disabled={disabled || !canStart || isRunning}
-          onClick={handleStart}
-        >
-          {isRunning ? 'Session in progress…' : 'Start Breathing Session'}
-        </button>
+    <div className="breathing-container">
+      <div className="breathing-circle-wrapper">
+        <div className={`breathing-circle ${isRunning ? 'active' : ''}`}>
+          <div className="breathing-text">{breathText}</div>
+          <div className="breathing-timer">{formattedTime}</div>
+        </div>
+
+        <div className="breathing-controls">
+          {isRunning ? (
+            <button className="calm-btn calm-btn--primary calm-btn--lg calm-btn--full" onClick={handleStop}>
+              Pause Session
+            </button>
+          ) : (
+            <button
+              className="calm-btn calm-btn--primary calm-btn--lg calm-btn--full"
+              type="button"
+              onClick={handleStart}
+              disabled={disabled || !canStart}
+            >
+              {disabled ? 'Already Completed Today' : 'Start Breathing Session'}
+            </button>
+          )}
+        </div>
       </div>
     </div>
   )
